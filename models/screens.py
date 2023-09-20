@@ -4,7 +4,7 @@ from models.button import Button
 
 from models.ship import Ship
 
-from models.bullets import Bullet
+from models.scoreboard import ScoreBoard
 
 class Screens:
     """It contain different screens."""
@@ -35,6 +35,14 @@ class Screens:
         
         # Bullet
         self.bullets = pygame.sprite.Group() 
+
+        # Score Board
+        self.scoreboard = ScoreBoard(
+            screen=self.screen,
+            settings=self.settings
+        )
+
+
         
 # Helper Methods.
     # Set Screen
@@ -50,6 +58,21 @@ class Screens:
         """Update Screen."""    
         # Make Recently drawn screen visible.
         pygame.display.flip()
+
+    def _draw_bullets(self):
+        """Draw Bullets.""" 
+        
+        for bullet in self.bullets.sprites().copy():
+            # Remove Bullet that cross the window
+            if bullet.y < 0: 
+                self.bullets.remove(bullet)
+
+        # Draw Bullet
+        for bullet in self.bullets.sprites():    
+            bullet.draw_bullet()   
+
+        print(len(self.bullets))    
+
 # -----------------------------------
 
 
@@ -74,12 +97,14 @@ class Screens:
 
         # Draw
 
+        # ScoreBoard
+        self.scoreboard.draw_scoreboard()
+
         # Draw ship
         self.ship.draw_ship()
 
         # Bullet
-        for bullet in self.bullets.sprites():
-            bullet.draw_bullet()
+        self._draw_bullets()
 
         self._update_screen()
 

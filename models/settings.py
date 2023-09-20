@@ -20,3 +20,8 @@ class Settings:
         self.bullet_height = 10
         self.bullet_speed = 2.5
         self.bullet_color = "white"
+
+        # ScoreBoard
+        self.scoreboard_width = self.screen_width
+        self.scoreboard_height = 50 
+        self.scoreboard_color = "green"
