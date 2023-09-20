@@ -93,21 +93,35 @@ class Screens:
         alien_width = alien1.rect.width
         alien_height = alien1.rect.height
         current_x = alien1.rect.x
+        current_y = alien1.rect.y
 
+        # # Column
+        while current_y < self.screen.get_rect().height - 2*alien_height:
 
-        while current_x < self.screen.get_rect().width - alien_width:
-            # Alien Instance
-            new_alien = Alien(screen=self.screen, settings=self.settings)
-            new_alien.rect.x = current_x
-            new_alien.x = current_x
+            # Row
+            while current_x < self.screen.get_rect().width - alien_width:
+                # Alien Instance
+                new_alien = Alien(screen=self.screen, settings=self.settings)
+                
+                # X
+                new_alien.rect.x = current_x
+                new_alien.x = current_x
+                
+                # Y
+                new_alien.rect.y = current_y
+                new_alien.y = current_y
 
-            # Add Alien in List : Aliens
-            self.aliens.add(new_alien)
+                # Add Alien in List : Aliens
+                self.aliens.add(new_alien)
 
-            # Next corrdinate
-            current_x += 2*alien_width
+                # Next corrdinate
+                current_x += 2*alien_width
 
-        
+            # # Reset x
+            current_x = alien_width
+
+            # # Next corrdinate
+            current_y += 2*alien_height
 # -----------------------------------
 
 
