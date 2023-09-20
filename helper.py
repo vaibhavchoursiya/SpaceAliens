@@ -23,21 +23,21 @@ class Helper:
     def _key_is_pressed(self, event):
         """When key is pressed."""
         if event.key == pygame.K_RIGHT:
-            # self.screens._set_screen(s2=True)
+            self.screens.ship.right =  True
             pass
 
         elif event.key == pygame.K_LEFT:
-            # self.screens._set_screen(s3=True)
+            self.screens.ship.left = True
             pass
     
     def _key_is_released(self, event):
         """When key is pressed."""
         if event.key == pygame.K_RIGHT:
-            # self.screens._set_screen(s1=True)
+            self.screens.ship.right = False
             pass
 
         elif event.key == pygame.K_LEFT:
-            # self.screens._set_screen(s2=True)
+            self.screens.ship.left = False
             pass
 
             

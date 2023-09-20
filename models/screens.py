@@ -2,6 +2,8 @@ import pygame
 
 from models.button import Button
 
+from models.ship import Ship
+
 class Screens:
     """It contain different screens."""
     def __init__(self,screen,settings):
@@ -22,6 +24,12 @@ class Screens:
             msg="Level",
             screen=self.screen,
             settings=self.settings)
+        
+        # Ship
+        self.ship = Ship(
+            screen=self.screen,
+            settings=self.settings
+            )
         
 # Helper Methods.
     # Set Screen
@@ -53,7 +61,14 @@ class Screens:
     # Main Screen
     def main_screen(self):
         """Main Screen."""   
-        self.screen.fill("red")
+        self.screen.fill("black")
+
+        # Ship
+        self.ship.update() 
+
+        # Draw Ship
+        self.ship.draw_ship()
+
         self._update_screen()
 
 
