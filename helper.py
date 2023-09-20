@@ -5,6 +5,8 @@ import sys
 
 from models.screens import Screens
 
+from models.bullets import Bullet
+
 class Helper:
     """It contain helper methods"""
     def __init__(self, screen, settings):
@@ -18,26 +20,49 @@ class Helper:
 
         # Screens
         self.screens = Screens(screen=self.screen, settings=self.settings)
+
+
     
 # Helper Method
     def _key_is_pressed(self, event):
         """When key is pressed."""
         if event.key == pygame.K_RIGHT:
-            self.screens.ship.right =  True
+            # Main Screen
+            if self.screens.s2:
+                self.screens.ship.right =  True
             pass
 
         elif event.key == pygame.K_LEFT:
-            self.screens.ship.left = True
+            # Main Screen
+            if self.screens.s2:
+                self.screens.ship.left = True
             pass
+
+        elif event.key == pygame.K_SPACE:
+            # Main Screen
+            if self.screens.s2:    
+                # Bullet Sprite
+                new_bullet = Bullet(
+                    screen= self.screen,
+                    settings=self.settings,
+                    ship=self.screens.ship
+                )
+
+                # Add Bullet
+                self.screens.bullets.add(new_bullet)
     
     def _key_is_released(self, event):
         """When key is pressed."""
         if event.key == pygame.K_RIGHT:
-            self.screens.ship.right = False
+            # Main Screen
+            if self.screens.s2:
+                self.screens.ship.right = False
             pass
 
         elif event.key == pygame.K_LEFT:
-            self.screens.ship.left = False
+            # Main Screen
+            if self.screens.s2:
+                self.screens.ship.left = False
             pass
 
             
@@ -74,4 +99,6 @@ class Helper:
                 if self.screens.s1:
                    self._mouse_is_clicked(current_pos)
                 pass
+
+            # Bullet
     

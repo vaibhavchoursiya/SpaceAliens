@@ -25,6 +25,7 @@ class SpaceAliens:
         # Clock
         self.clock = pygame.time.Clock()
 
+        # Helper Instance
         self.hp = Helper(screen=self.screen,settings = self.settings)
 
     

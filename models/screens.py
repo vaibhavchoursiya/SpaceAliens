@@ -4,6 +4,8 @@ from models.button import Button
 
 from models.ship import Ship
 
+from models.bullets import Bullet
+
 class Screens:
     """It contain different screens."""
     def __init__(self,screen,settings):
@@ -30,6 +32,9 @@ class Screens:
             screen=self.screen,
             settings=self.settings
             )
+        
+        # Bullet
+        self.bullets = pygame.sprite.Group() 
         
 # Helper Methods.
     # Set Screen
@@ -65,9 +70,16 @@ class Screens:
 
         # Ship
         self.ship.update() 
+        self.bullets.update()
 
-        # Draw Ship
+        # Draw
+
+        # Draw ship
         self.ship.draw_ship()
+
+        # Bullet
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
 
         self._update_screen()
 
