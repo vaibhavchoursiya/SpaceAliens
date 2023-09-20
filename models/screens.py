@@ -6,6 +6,10 @@ from models.ship import Ship
 
 from models.scoreboard import ScoreBoard
 
+from models.alien import Alien
+
+from pygame.sprite import Sprite
+
 class Screens:
     """It contain different screens."""
     def __init__(self,screen,settings):
@@ -42,6 +46,13 @@ class Screens:
             settings=self.settings
         )
 
+        # Aliens
+        self.aliens = pygame.sprite.Group()
+
+
+        # Alien Fleet
+        self._create_alien_fleet()
+
 
         
 # Helper Methods.
@@ -73,6 +84,30 @@ class Screens:
 
         print(len(self.bullets))    
 
+
+    def _create_alien_fleet(self):
+        """create alien fleet"""
+
+        alien1 =  Alien(self.screen, self.settings)
+        # Alien spec
+        alien_width = alien1.rect.width
+        alien_height = alien1.rect.height
+        current_x = alien1.rect.x
+
+
+        while current_x < self.screen.get_rect().width - alien_width:
+            # Alien Instance
+            new_alien = Alien(screen=self.screen, settings=self.settings)
+            new_alien.rect.x = current_x
+            new_alien.x = current_x
+
+            # Add Alien in List : Aliens
+            self.aliens.add(new_alien)
+
+            # Next corrdinate
+            current_x += 2*alien_width
+
+        
 # -----------------------------------
 
 
@@ -95,7 +130,11 @@ class Screens:
         self.ship.update() 
         self.bullets.update()
 
+        # Alien
+        # self.aliens.update()
+
         # Draw
+        
 
         # ScoreBoard
         self.scoreboard.draw_scoreboard()
@@ -105,6 +144,9 @@ class Screens:
 
         # Bullet
         self._draw_bullets()
+
+        print(f"alien = {len(self.aliens)}")
+        self.aliens.draw(self.screen)
 
         self._update_screen()
 

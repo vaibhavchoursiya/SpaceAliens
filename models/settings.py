@@ -24,4 +24,7 @@ class Settings:
         # ScoreBoard
         self.scoreboard_width = self.screen_width
         self.scoreboard_height = 50 
-        self.scoreboard_color = "green"
+        self.scoreboard_color = "black"
+
+        # Alien
+        self.alien_speed = 10
