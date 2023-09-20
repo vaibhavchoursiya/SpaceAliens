@@ -1,5 +1,7 @@
 import pygame
 
+from models.button import Button
+
 class Screens:
     """It contain different screens."""
     def __init__(self,screen,settings):
@@ -9,6 +11,18 @@ class Screens:
 
         self._set_screen(s1=True)
 
+        self.play = Button(
+            background_color="white",
+            msg="New Game",
+            screen=self.screen,
+            settings=self.settings)
+
+        self.level = Button(
+            background_color="white",
+            msg="Level",
+            screen=self.screen,
+            settings=self.settings)
+        
 # Helper Methods.
     # Set Screen
     def _set_screen(self,s1=False, s2=False, s3=False, s4=False):
@@ -29,7 +43,11 @@ class Screens:
     # Intro Screen
     def intro_screen(self):
         """intro screen."""
-        self.screen.fill("green")
+        # Button
+        self.play.draw_button(self.settings.screen_height/2 - 10)
+        self.level.draw_button(self.settings.screen_height/2 + 40)
+
+
         self._update_screen()
 
     # Main Screen

@@ -42,7 +42,9 @@ class Helper:
 
             
     def _mouse_is_clicked(self, current_pos):
-        # self.screens._set_screen(s4=True)
+        if self.screens.play.rect.collidepoint(current_pos):
+            self.screens._set_screen(s2=True)
+            
         pass
 
 
@@ -69,6 +71,7 @@ class Helper:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 current_pos = pygame.mouse.get_pos()
                 print(current_pos)
-                self._mouse_is_clicked(current_pos)
+                if self.screens.s1:
+                   self._mouse_is_clicked(current_pos)
                 pass
     
