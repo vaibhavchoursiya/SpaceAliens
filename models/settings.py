@@ -20,6 +20,9 @@ class Settings:
         self.bullet_height = 10
         self.bullet_speed = 2.5
         self.bullet_color = "white"
+        # Make Bullet visible.
+        # only those bullets that can whole divide by this number.
+        self.bullet_visible = 7
 
         # ScoreBoard
         self.scoreboard_width = self.screen_width

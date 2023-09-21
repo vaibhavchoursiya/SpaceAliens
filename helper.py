@@ -38,18 +38,6 @@ class Helper:
                 self.screens.ship.left = True
             pass
 
-        elif event.key == pygame.K_SPACE:
-            # Main Screen
-            if self.screens.s2:    
-                # Bullet Sprite
-                new_bullet = Bullet(
-                    screen= self.screen,
-                    settings=self.settings,
-                    ship=self.screens.ship
-                )
-
-                # Add Bullet
-                self.screens.bullets.add(new_bullet)
     
     def _key_is_released(self, event):
         """When key is pressed."""

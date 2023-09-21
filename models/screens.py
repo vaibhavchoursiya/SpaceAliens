@@ -10,12 +10,17 @@ from models.alien import Alien
 
 from models.stats import Stats
 
+from models.bullets import Bullet
+
 class Screens:
     """It contain different screens."""
     def __init__(self,screen,settings):
         """Initilize screens."""
         self.screen = screen
         self.settings = settings
+
+        # Bullet id
+        self.bullet_id = 0
 
         # Stats instance
         self.stats = Stats()
@@ -59,6 +64,7 @@ class Screens:
         self._create_alien_fleet()
 
 
+
         
 # Helper Methods.
     # Set Screen
@@ -80,7 +86,7 @@ class Screens:
         
         for bullet in self.bullets.sprites().copy():
             # Remove Bullet that cross the window
-            if bullet.y < 0: 
+            if bullet.y < 0 or bullet.bullet_id % self.settings.bullet_visible != 0: 
                 self.bullets.remove(bullet)
 
         # Draw Bullet
@@ -136,7 +142,17 @@ class Screens:
         if pygame.sprite.groupcollide(self.aliens, self.bullets, True, True):
             # Increase score of Player.
             self.stats.update_score()
-            
+
+
+    def _create_bullets(self):
+        new_bullet = Bullet(
+            screen=self.screen,
+            settings= self.settings,
+            ship=self.ship,
+            id = self.bullet_id
+        )        
+        self.bullet_id+=1
+        self.bullets.add(new_bullet)
 # -----------------------------------
 
 
@@ -154,6 +170,9 @@ class Screens:
     def main_screen(self):
         """Main Screen."""   
         self.screen.fill("black")
+        
+        # Create Bullets
+        self._create_bullets()
 
     # Update
 
