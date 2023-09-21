@@ -13,6 +13,7 @@ class Stats:
     def _reset_stats(self):
         """Reset Stats."""    
         self.level = 1
+        self.score = 0
 
 # Update level:
     def update_level(self):

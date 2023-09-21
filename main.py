@@ -19,6 +19,8 @@ class SpaceAliens:
         # Surface object of screen
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
 
+        
+
         # Caption
         pygame.display.set_caption("SpaceAliens")
 

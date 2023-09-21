@@ -15,15 +15,20 @@ class Ship:
         self.image = pygame.image.load("Images/ship.png")
         self.rect = self.image.get_rect()
 
+        # Initial Position 
+        self.initial_position_of_ship()
+
+        # Moving Flags
+        self.right = False
+        self.left = False
+
+
+    def initial_position_of_ship(self):
         # Ship at Mid Bottom of Screen.
         self.rect.midbottom = self.screen_rect.midbottom
 
         # x corrdinates
         self.x = self.rect.x
-
-        # Moving Flags
-        self.right = False
-        self.left = False
 
     # Update ship position
     def update(self):

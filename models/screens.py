@@ -21,6 +21,11 @@ class Screens:
         self.screen = screen
         self.settings = settings
 
+        # Load Image
+        self.image = pygame.image.load("Images/background.jpg")
+        self.image1 = pygame.image.load("Images/background1.jpg")
+
+
         # Bullet id
         self.bullet_id = 0
 
@@ -29,31 +34,12 @@ class Screens:
 
         self._set_screen(s1=True)
 
+        # Buttons
         self._intro_screen_button()
+        self._gameover_screen_button()
         
-        # Ship
-        self.ship = Ship(
-            screen=self.screen,
-            settings=self.settings
-            )
         
-        # Bullet
-        self.bullets = pygame.sprite.Group() 
-
-        # Score Board
-        self.scoreboard = ScoreBoard(
-            screen=self.screen,
-            settings=self.settings,
-            stats= self.stats
-            
-        )
-
-        # Aliens
-        self.aliens = pygame.sprite.Group()
-
-
-        # Alien Fleet
-        self._create_alien_fleet()
+        
 
 
 
@@ -75,6 +61,21 @@ class Screens:
             screen=self.screen,
             settings=self.settings)
 
+
+# GameOver screen button
+    def _gameover_screen_button(self):
+        """Intro screen buttons."""
+        self.gameover = Button(
+            background_color="white",
+            msg="Game Over",
+            screen=self.screen,
+            settings=self.settings)
+
+        self.back_intro = Button(
+            background_color="white",
+            msg="< Back",
+            screen=self.screen,
+            settings=self.settings)
 
     # Set Screen
     def _set_screen(self,s1=False, s2=False, s3=False, s4=False, s5=False):
@@ -118,7 +119,7 @@ class Screens:
         current_y = alien1.rect.y
 
         # # Column
-        while current_y < self.screen.get_rect().height - 2*alien_height:
+        while current_y < self.screen.get_rect().height - 3*alien_height:
 
             # Row
             while current_x < self.screen.get_rect().width - alien_width:
@@ -190,9 +191,35 @@ class Screens:
     # Intro Screen
     def intro_screen(self):
         """intro screen."""
+        self.screen.blit(self.image,(0, 0))
         # Button
         self.play.draw_button(self.settings.screen_height/2 - 10)
         self.level.draw_button(self.settings.screen_height/2 + 40)
+
+        # Ship
+        self.ship = Ship(
+            screen=self.screen,
+            settings=self.settings
+            )
+        
+        # Bullet
+        self.bullets = pygame.sprite.Group() 
+
+        
+        # Score Board
+        self.scoreboard = ScoreBoard(
+            screen=self.screen,
+            settings=self.settings,
+            stats= self.stats
+            
+        )
+
+        # Aliens
+        self.aliens = pygame.sprite.Group()
+
+
+        # Alien Fleet
+        self._create_alien_fleet()
 
 
         self._update_screen()
@@ -201,14 +228,14 @@ class Screens:
     # Pre Main Screen
     def pre_main_screen(self):
         """Screen Before Main Screen"""
-        self.screen.fill("black")
-
-        for i in range(3):
+        self.screen.blit(self.image1, (0, 0))
+        i = 3
+        while i > 0:
                 
             # Label or Button
             self.countdown = Button(
             background_color="white",
-            msg=f"{i+1}",
+            msg=f"{i}",
             screen=self.screen,
             settings=self.settings)
 
@@ -230,6 +257,7 @@ class Screens:
 
             # Label
             sleep(1)
+            i-=1
 
         self._set_screen(s2=True)
 
@@ -241,7 +269,8 @@ class Screens:
     # Main Screen
     def main_screen(self):
         """Main Screen."""   
-        self.screen.fill("red")
+        self.screen.blit(self.image1, (0, 0))
+
         
     # Create Bullets
         self._create_bullets()
@@ -287,11 +316,17 @@ class Screens:
 
     # Game over
     def game_over(self):
-        """Game Over."""    
+        """Game Over."""   
+        self.screen.blit(self.image1, (0, 0))
 
+        self.gameover.draw_button(self.settings.screen_height/2 - 17)
+        self.back_intro.draw_button(self.settings.screen_height/2 + 40)
 
-        # self.screen.fill("pink")
+        
         self._update_screen()
+
+        # Reset Things
+        self.stats._reset_stats()
 
 
     # Next Level
