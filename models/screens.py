@@ -12,6 +12,8 @@ from models.stats import Stats
 
 from models.bullets import Bullet
 
+from time import sleep
+
 class Screens:
     """It contain different screens."""
     def __init__(self,screen,settings):
@@ -75,12 +77,13 @@ class Screens:
 
 
     # Set Screen
-    def _set_screen(self,s1=False, s2=False, s3=False, s4=False):
+    def _set_screen(self,s1=False, s2=False, s3=False, s4=False, s5=False):
         """Set screen which value is True."""    
         self.s1 = s1
         self.s2 = s2
         self.s3 = s3
         self.s4 = s4
+        self.s5 = s5
 
     # Update screen
     def _update_screen(self):
@@ -193,6 +196,47 @@ class Screens:
 
 
         self._update_screen()
+
+
+    # Pre Main Screen
+    def pre_main_screen(self):
+        """Screen Before Main Screen"""
+        self.screen.fill("black")
+
+        for i in range(3):
+                
+            # Label or Button
+            self.countdown = Button(
+            background_color="white",
+            msg=f"{i+1}",
+            screen=self.screen,
+            settings=self.settings)
+
+           
+
+            # Draw ScoreBoard
+            self.scoreboard.draw_scoreboard()
+
+            # Draw Alien
+            self.aliens.draw(self.screen)
+
+            # Draw Ship
+            self.ship.draw_ship()
+
+            # Draw Button
+            self.countdown.draw_button()
+
+            self._update_screen()
+
+            # Label
+            sleep(1)
+
+        self._set_screen(s2=True)
+
+
+
+
+
 
     # Main Screen
     def main_screen(self):

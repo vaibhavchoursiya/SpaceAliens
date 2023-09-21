@@ -44,8 +44,11 @@ class SpaceAliens:
             elif self.hp.screens.s3:
                 self.hp.screens.game_over()    
 
-            if self.hp.screens.s4:
+            elif self.hp.screens.s4:
                 self.hp.screens.next_level()    
+
+            elif self.hp.screens.s5:
+                self.hp.screens.pre_main_screen()    
 
 
             self.clock.tick(self.hp.settings.frame_rate)

@@ -56,7 +56,8 @@ class Helper:
             
     def _mouse_is_clicked(self, current_pos):
         if self.screens.play.rect.collidepoint(current_pos):
-            self.screens._set_screen(s2=True)
+            # Pre Main Screen
+            self.screens._set_screen(s5=True)
             
         pass
 
