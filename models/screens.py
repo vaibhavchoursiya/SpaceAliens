@@ -8,7 +8,7 @@ from models.scoreboard import ScoreBoard
 
 from models.alien import Alien
 
-from pygame.sprite import Sprite
+from models.stats import Stats
 
 class Screens:
     """It contain different screens."""
@@ -16,6 +16,9 @@ class Screens:
         """Initilize screens."""
         self.screen = screen
         self.settings = settings
+
+        # Stats instance
+        self.stats = Stats()
 
         self._set_screen(s1=True)
 
@@ -43,7 +46,9 @@ class Screens:
         # Score Board
         self.scoreboard = ScoreBoard(
             screen=self.screen,
-            settings=self.settings
+            settings=self.settings,
+            stats= self.stats
+            
         )
 
         # Aliens
@@ -122,6 +127,16 @@ class Screens:
 
             # # Next corrdinate
             current_y += 2*alien_height
+
+
+    def _collide_between_aliens_and_bullets(self):
+        """Check Collide Between Aliens and Bullets ,
+        Delete Both of them.
+        """        
+        if pygame.sprite.groupcollide(self.aliens, self.bullets, True, True):
+            # Increase score of Player.
+            self.stats.update_score()
+            
 # -----------------------------------
 
 
@@ -140,14 +155,22 @@ class Screens:
         """Main Screen."""   
         self.screen.fill("black")
 
+    # Update
+
         # Ship
         self.ship.update() 
+
+        # Bullets
         self.bullets.update()
 
         # Alien
-        # self.aliens.update()
+        self.aliens.update()
 
-        # Draw
+    # Collide between alien and Bullet
+        self._collide_between_aliens_and_bullets()
+
+        self.scoreboard.update()
+    # Draw
         
 
         # ScoreBoard

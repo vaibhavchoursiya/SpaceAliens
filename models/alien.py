@@ -13,7 +13,6 @@ class Alien(Sprite):
         self.screen = screen
         self.screen_rect = screen.get_rect()
         self.settings = settings
-        self.scoreboard = ScoreBoard(screen=self.screen,settings=self.settings)
         self.alien_size = (60, 60)
 
         # Image and Rect of image
@@ -32,8 +31,9 @@ class Alien(Sprite):
 
 
     def update(self):
-        """Update alien Position."""    
-        self.y -= self.settings.alien_speed
+        """Update alien Position."""  
+        # Increase Y- corrdiate of alien.  
+        self.y += self.settings.alien_speed
         self.rect.y = self.y
 
 

@@ -27,4 +27,4 @@ class Settings:
         self.scoreboard_color = "black"
 
         # Alien
-        self.alien_speed = 10
+        self.alien_speed = 1.0

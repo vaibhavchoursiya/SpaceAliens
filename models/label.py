@@ -6,7 +6,7 @@ class Label:
         """Initilize Label attributes and set it Initial Location."""
         self.screen = screen
         self.settings = settings
-        self.font_size = 15
+        self.font_size = 10
         self.label = label
         
 
