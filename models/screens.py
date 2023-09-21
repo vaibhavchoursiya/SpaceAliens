@@ -27,17 +27,7 @@ class Screens:
 
         self._set_screen(s1=True)
 
-        self.play = Button(
-            background_color="white",
-            msg="New Game",
-            screen=self.screen,
-            settings=self.settings)
-
-        self.level = Button(
-            background_color="white",
-            msg="Level",
-            screen=self.screen,
-            settings=self.settings)
+        self._intro_screen_button()
         
         # Ship
         self.ship = Ship(
@@ -67,6 +57,23 @@ class Screens:
 
         
 # Helper Methods.
+
+    # Intro screen button
+    def _intro_screen_button(self):
+        """Intro screen buttons."""
+        self.play = Button(
+            background_color="white",
+            msg="New Game",
+            screen=self.screen,
+            settings=self.settings)
+
+        self.level = Button(
+            background_color="white",
+            msg="Level",
+            screen=self.screen,
+            settings=self.settings)
+
+
     # Set Screen
     def _set_screen(self,s1=False, s2=False, s3=False, s4=False):
         """Set screen which value is True."""    
@@ -81,6 +88,7 @@ class Screens:
         # Make Recently drawn screen visible.
         pygame.display.flip()
 
+    # Draw Bullets
     def _draw_bullets(self):
         """Draw Bullets.""" 
         
@@ -95,7 +103,7 @@ class Screens:
 
         print(len(self.bullets))    
 
-
+    # Create Alien Fleet
     def _create_alien_fleet(self):
         """create alien fleet"""
 
@@ -135,6 +143,7 @@ class Screens:
             current_y += 2*alien_height
 
 
+    # Collide Between aliens and bullets 
     def _collide_between_aliens_and_bullets(self):
         """Check Collide Between Aliens and Bullets ,
         Delete Both of them.
@@ -143,8 +152,9 @@ class Screens:
             # Increase score of Player.
             self.stats.update_score()
 
-
+    # Create Bullets
     def _create_bullets(self):
+        """Create Bullet object and in bullets List."""
         new_bullet = Bullet(
             screen=self.screen,
             settings= self.settings,
@@ -153,6 +163,24 @@ class Screens:
         )        
         self.bullet_id+=1
         self.bullets.add(new_bullet)
+
+
+    # Check Alien crossed ship
+    def _alien_crossed_ship(self):
+        for alien in self.aliens.sprites():
+            # If alien reached the bottom of screen without hitting bullet.
+            if alien.rect.y > self.screen.get_rect().height - alien.rect.height:
+                print("alien crossed the widn")
+                return True
+
+
+    # Check ship and alien collided
+    def _collide_alien_and_ship(self):
+        """ If alien and ship collided switch to game over screen"""
+        if pygame.sprite.spritecollideany(self.ship, self.aliens) or self._alien_crossed_ship():
+            self._set_screen(s3=True)
+            print("collide ship and alien")
+
 # -----------------------------------
 
 
@@ -169,9 +197,9 @@ class Screens:
     # Main Screen
     def main_screen(self):
         """Main Screen."""   
-        self.screen.fill("black")
+        self.screen.fill("red")
         
-        # Create Bullets
+    # Create Bullets
         self._create_bullets()
 
     # Update
@@ -188,7 +216,13 @@ class Screens:
     # Collide between alien and Bullet
         self._collide_between_aliens_and_bullets()
 
+        # Update score board
         self.scoreboard.update()
+
+
+    # Collide between alien and ship or alien cross the ship
+        self._collide_alien_and_ship()    
+
     # Draw
         
 
@@ -210,7 +244,9 @@ class Screens:
     # Game over
     def game_over(self):
         """Game Over."""    
-        self.screen.fill("pink")
+
+
+        # self.screen.fill("pink")
         self._update_screen()
 
 

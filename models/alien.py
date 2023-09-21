@@ -13,7 +13,7 @@ class Alien(Sprite):
         self.screen = screen
         self.screen_rect = screen.get_rect()
         self.settings = settings
-        self.alien_size = (60, 60)
+        self.alien_size = (60, 50)
 
         # Image and Rect of image
         self.image = pygame.image.load("Images/alien.png")
