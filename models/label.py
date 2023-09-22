@@ -41,7 +41,10 @@ class Label:
 
     def draw_on_intro_screen(self, x=0, y=100):
         """Draw on intro screen."""    
+        # Select Color
         selected = choice(self.settings.color)
+
+        # Render font
         self.text_image = self.font.render(
             self.label,
             True,
@@ -49,6 +52,7 @@ class Label:
             "black"
         )    
 
+        # Set text_image x and y corrdinates.
         self.text_image_rect.centerx = x + self.screen.get_rect().centerx
         self.text_image_rect.centery = y
 

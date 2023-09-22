@@ -19,9 +19,6 @@ class Button:
         # Button rect object
         self.rect = pygame.Rect(0, 0, self.text_image_rect.width + self.extra_padding, self.text_image_rect.height + self.extra_padding)
 
-        
-
-
 
 # Helper Method
     def _pre_text(self, msg):
@@ -33,10 +30,12 @@ class Button:
             "black",
             self.background_color
             )
-
+        
+        # Image Rect object
         self.text_image_rect = self.text_image.get_rect()
 
 # -------------------------------------------------------------------
+
 # Draw Text and Button
     def draw_button(self,y=None):
         """Draw Button of screen."""
@@ -48,9 +47,10 @@ class Button:
         else:    
             self.rect.centery = y    
 
+        # Set Text Image center corrdinates.
         self.text_image_rect.centery = self.rect.centery
         self.text_image_rect.centerx = self.rect.centerx
         
-
+        # Draw Rect
         pygame.draw.rect(self.screen, self.background_color, self.rect)
         self.screen.blit(self.text_image, self.text_image_rect)

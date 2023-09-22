@@ -29,17 +29,10 @@ class Alien(Sprite):
         self.x = self.rect.x
         self.y = self.rect.y
 
-
+    # Overriding update method
+    # Update alien position only y -corrdiates.
     def update(self):
         """Update alien Position."""  
         # Increase Y- corrdiate of alien.  
         self.y += self.settings.alien_speed
         self.rect.y = self.y
-
-
-    # def draw_alien(self):
-    #     """Draw Alien."""
-    #     self.screen.blit(self.image, self.rect)
-
-        
-

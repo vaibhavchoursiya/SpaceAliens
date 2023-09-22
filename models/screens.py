@@ -436,10 +436,3 @@ class Screens:
         """Next Level."""    
         print(f"alien_speed:{self.settings.alien_speed}")
         self.main_screen()
-
-
-
-
-
-
-

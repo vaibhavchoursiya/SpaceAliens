@@ -68,6 +68,8 @@ class ScoreBoard:
         self.highscore.text_image_rect.centery = self.scoreboard.centery
 
 # ------------------------------------------------------------------------------
+
+# Update scoreboard
     def update(self):
         """Update score board."""  
         # Update Labels  
@@ -76,7 +78,7 @@ class ScoreBoard:
         self._score_label()
         
         
-
+# Draw scoreboard
     def draw_scoreboard(self):
         """Draw ScoreBoard in screen."""
         pygame.draw.rect(

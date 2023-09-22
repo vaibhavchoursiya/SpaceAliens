@@ -32,10 +32,14 @@ class Bullet(Sprite):
         if self.bullet_id % self.settings.bullet_visible == 0 :
             self.y -= self.settings.bullet_speed
             self.rect.y = self.y
-        
+    
+    # Draw Bullet
     def draw_bullet(self):
         """Draw Bullet on screen."""
+        # Color
         selected_color = choice(self.settings.color)
+
+        # Draw Rect object
         pygame.draw.rect(self.screen,
                         selected_color,
                         self.rect)
