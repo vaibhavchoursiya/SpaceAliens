@@ -14,6 +14,8 @@ from models.bullets import Bullet
 
 from time import sleep
 
+from database.game_database import *
+
 class Screens:
     """It contain different screens."""
     def __init__(self,screen,settings):
@@ -183,6 +185,12 @@ class Screens:
     def _collide_alien_and_ship(self):
         """ If alien and ship collided switch to game over screen"""
         if pygame.sprite.spritecollideany(self.ship, self.aliens) or self._alien_crossed_ship():
+            # Update Highscore
+            highscore = read_data()
+            # Update the highscore if current score is greater than
+            # Saved highscore.
+            if  self.stats.score > int(highscore):
+                write_data(self.stats.score)
             self._set_screen(s3=True)
             print("collide ship and alien")
 

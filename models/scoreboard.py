@@ -4,6 +4,8 @@ from models.label import Label
 
 from models.stats import Stats
 
+from database.game_database import *
+
 class ScoreBoard:
     """It contain scoreboard attributes and methods."""
     def __init__(self, screen, settings, stats):
@@ -52,10 +54,12 @@ class ScoreBoard:
     
     def _highscore_label(self):
         """Highscore Label"""
-         # Highscore
+        highscore = read_data()
+        print(highscore)
+        # Highscore
         self.highscore = Label(
             # This value should come from database highscore.
-            label=f"High Score:20",
+            label=f"High Score:{highscore}",
             screen=self.screen,
             settings=self.settings
         )
