@@ -37,7 +37,7 @@ class SpaceAliens:
         while True:
             self.hp.check_event()
 
-            if self.hp.screens.s1:
+            if self.hp.screens.s1:  
                 self.hp.screens.intro_screen()
 
             elif self.hp.screens.s2:
@@ -52,7 +52,9 @@ class SpaceAliens:
             elif self.hp.screens.s5:
                 self.hp.screens.pre_main_screen()    
 
-
+            elif self.hp.screens.s6:
+                self.hp.screens.pre_next_level()   
+                
             self.clock.tick(self.hp.settings.frame_rate)
 
 

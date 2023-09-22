@@ -28,13 +28,13 @@ class Helper:
         """When key is pressed."""
         if event.key == pygame.K_RIGHT:
             # Main Screen
-            if self.screens.s2:
+            if self.screens.s2 or self.screens.s4:
                 self.screens.ship.right =  True
             pass
 
         elif event.key == pygame.K_LEFT:
             # Main Screen
-            if self.screens.s2:
+            if self.screens.s2 or self.screens.s4:
                 self.screens.ship.left = True
             pass
 
@@ -43,13 +43,13 @@ class Helper:
         """When key is pressed."""
         if event.key == pygame.K_RIGHT:
             # Main Screen
-            if self.screens.s2:
+            if self.screens.s2 or self.screens.s4:
                 self.screens.ship.right = False
             pass
 
         elif event.key == pygame.K_LEFT:
             # Main Screen
-            if self.screens.s2:
+            if self.screens.s2 or self.screens.s4:
                 self.screens.ship.left = False
             pass
 

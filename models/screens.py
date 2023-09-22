@@ -57,7 +57,7 @@ class Screens:
 
         self.level = Button(
             background_color="white",
-            msg="Level",
+            msg=f"Level:{self.stats.level}",
             screen=self.screen,
             settings=self.settings)
 
@@ -78,13 +78,14 @@ class Screens:
             settings=self.settings)
 
     # Set Screen
-    def _set_screen(self,s1=False, s2=False, s3=False, s4=False, s5=False):
+    def _set_screen(self,s1=False, s2=False, s3=False, s4=False, s5=False, s6=False):
         """Set screen which value is True."""    
         self.s1 = s1
         self.s2 = s2
         self.s3 = s3
         self.s4 = s4
         self.s5 = s5
+        self.s6 = s6
 
     # Update screen
     def _update_screen(self):
@@ -184,6 +185,17 @@ class Screens:
         if pygame.sprite.spritecollideany(self.ship, self.aliens) or self._alien_crossed_ship():
             self._set_screen(s3=True)
             print("collide ship and alien")
+
+
+    # Check All aliens are distroied
+    def _check_all_aliens_are_distroied(self):
+        """"Check All aliens are distroied."""
+        # If aliens are empty.
+        if not self.aliens:
+            # Pre Next Level Screen
+            self._set_screen(s6=True)
+           
+
 
 # -----------------------------------
 
@@ -296,6 +308,10 @@ class Screens:
     # Collide between alien and ship or alien cross the ship
         self._collide_alien_and_ship()    
 
+    # Check if every alien is distroed or not.
+    # if they then go to next level.
+        self._check_all_aliens_are_distroied()    
+
     # Draw
         
 
@@ -305,6 +321,7 @@ class Screens:
         # Draw ship
         self.ship.draw_ship()
 
+        
         # Bullet
         self._draw_bullets()
 
@@ -329,11 +346,60 @@ class Screens:
         self.stats._reset_stats()
 
 
+    # Pre Next Level Screen
+    def pre_next_level(self):
+        """Screen before next_level."""
+        self.screen.blit(self.image1, (0, 0))
+
+        # Updates :- Level, Ship Speed, Alien Speed, Bullet Speed
+        # Update Level
+        self.stats.update_level()
+
+        i = 3
+        while i > 0:
+            # Label or Button
+            self.countdown = Button(
+            background_color="white",
+            msg=f"{i}",
+            screen=self.screen,
+            settings=self.settings)
+
+            self.next_level_label = Button(
+            background_color="white",
+            msg=f"Next Level {self.stats.level} in",
+            screen=self.screen,
+            settings=self.settings)
+
+            # Draw
+            self.countdown.draw_button()
+            self.next_level_label.draw_button(y=self.settings.screen_height/2 - 50)
+
+            self._update_screen()
+
+            sleep(1)
+            
+            i -= 1
+
+        # Next Level Screen.
+        self._set_screen(s4=True)
+         
+        
+        # Bullets
+        self.bullets.empty()
+
+        # Create Alien Fleet
+        # Modified This Method for create one extra alien.
+        self._create_alien_fleet()
+
+        self.ship.initial_position_of_ship()
+
+
+
     # Next Level
     def next_level(self):
         """Next Level."""    
-        self.screen.fill("orange")
-        self._update_screen()
+        
+        self.main_screen()
 
 
 
