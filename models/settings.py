@@ -58,6 +58,10 @@ class Settings:
         # Ship
         self.ship_speed = 2.0
 
+        # Color
+        self.color = ["red", "green", "white", "yellow", "blue", "pink", "orange"]
+
+
     # Update Settings
     def update(self, level):
         """Update settings : ship_speed, bullet_speed and alien_speed """    

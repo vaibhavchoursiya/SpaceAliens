@@ -1,12 +1,14 @@
 import pygame.font
 
+from random import choice
+
 class Label:
     """It contain label attirbutes and methods."""
-    def __init__(self, label, screen, settings):
+    def __init__(self, label, screen, settings, font_size=10):
         """Initilize Label attributes and set it Initial Location."""
         self.screen = screen
         self.settings = settings
-        self.font_size = 10
+        self.font_size = font_size
         self.label = label
         
 
@@ -33,5 +35,22 @@ class Label:
     def _draw_on_scoreboard(self):
         """Draw on Scoreboard."""
         
+        # Draw Image.
+        self.screen.blit(self.text_image, self.text_image_rect)
+
+
+    def draw_on_intro_screen(self, x=0, y=100):
+        """Draw on intro screen."""    
+        selected = choice(self.settings.color)
+        self.text_image = self.font.render(
+            self.label,
+            True,
+            selected,
+            "black"
+        )    
+
+        self.text_image_rect.centerx = x + self.screen.get_rect().centerx
+        self.text_image_rect.centery = y
+
         # Draw Image.
         self.screen.blit(self.text_image, self.text_image_rect)

@@ -16,6 +16,8 @@ from time import sleep
 
 from database.game_database import *
 
+from models.label import Label
+
 class Screens:
     """It contain different screens."""
     def __init__(self,screen,settings):
@@ -215,9 +217,31 @@ class Screens:
         # Reset Settings
         self.settings.reset_settings()
 
+        # Intro Label
+        self.intro_label1 = Label(
+            label="Space",
+            font_size=80,
+            screen=self.screen,
+            settings=self.settings
+        )
+        self.intro_label1.draw_on_intro_screen(
+            x=-20
+        )
+
+        self.intro_label2 = Label(
+            label="Aliens",
+            font_size=60,
+            screen=self.screen,
+            settings=self.settings,
+        )
+        self.intro_label2.draw_on_intro_screen(
+            x=120,
+            y=166
+        )
+
         # Button
-        self.play.draw_button(self.settings.screen_height/2 - 10)
-        self.level.draw_button(self.settings.screen_height/2 + 40)
+        self.play.draw_button(self.settings.screen_height/2 + 20)
+        self.level.draw_button(self.settings.screen_height/2 + 70)
 
         # Ship
         self.ship = Ship(

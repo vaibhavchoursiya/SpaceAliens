@@ -2,6 +2,8 @@ from pygame.sprite import Sprite
 
 import pygame
 
+from random import choice
+
 class Bullet(Sprite):
     """It contain bullet attributes and methods."""
     def __init__(self, screen, settings, ship, id):
@@ -33,7 +35,8 @@ class Bullet(Sprite):
         
     def draw_bullet(self):
         """Draw Bullet on screen."""
+        selected_color = choice(self.settings.color)
         pygame.draw.rect(self.screen,
-                        self.settings.bullet_color,
+                        selected_color,
                         self.rect)
         
