@@ -12,13 +12,10 @@ class Settings:
         # Frame rate
         self.frame_rate = 60
 
-        # Ship
-        self.ship_speed = 2.5
 
         # Bullet
         self.bullet_width = 3
         self.bullet_height = 10
-        self.bullet_speed = 3.0
         self.bullet_color = "white"
         # Make Bullet visible.
         # only those bullets that can whole divide by this number.
@@ -28,6 +25,49 @@ class Settings:
         self.scoreboard_width = self.screen_width
         self.scoreboard_height = 50 
         self.scoreboard_color = "black"
+        
+        # Level List
+        self.LEVEL_LIST = []
+
+        self._create_level()
+
+# Helper Method
+    def _create_level(self):
+        """Create Levels"""
+        for i in range(2, 100):
+            dic = {}
+            
+            # Create Level
+            dic["alien_speed"] = 0.3 + (i/10)
+            dic["ship_speed"] = 2.0 + (i/10)
+            dic["bullet_speed"] = 2.0 + (i/10)
+           
+            self.LEVEL_LIST.append(dic)
+# ---------------------------------------------------------
+
+
+    # Reset Settings   
+    def reset_settings(self):
+        """Reset the settings:"""
+        # Bullet
+        self.bullet_speed = 2.0
 
         # Alien
-        self.alien_speed = 0.2
+        self.alien_speed = 0.3
+
+        # Ship
+        self.ship_speed = 2.0
+
+    # Update Settings
+    def update(self, level):
+        """Update settings : ship_speed, bullet_speed and alien_speed """    
+        
+        # Bullet
+        self.bullet_speed  = self.LEVEL_LIST[level]["bullet_speed"]
+
+        # Alien
+        self.alien_speed = self.LEVEL_LIST[level]["alien_speed"]
+
+        # Ship
+        self.ship_speed = self.LEVEL_LIST[level]["ship_speed"]
+        

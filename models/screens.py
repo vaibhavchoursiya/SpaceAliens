@@ -204,6 +204,9 @@ class Screens:
     def intro_screen(self):
         """intro screen."""
         self.screen.blit(self.image,(0, 0))
+        # Reset Settings
+        self.settings.reset_settings()
+
         # Button
         self.play.draw_button(self.settings.screen_height/2 - 10)
         self.level.draw_button(self.settings.screen_height/2 + 40)
@@ -354,6 +357,7 @@ class Screens:
         # Updates :- Level, Ship Speed, Alien Speed, Bullet Speed
         # Update Level
         self.stats.update_level()
+        self.settings.update(self.stats.level)
 
         i = 3
         while i > 0:
@@ -398,7 +402,7 @@ class Screens:
     # Next Level
     def next_level(self):
         """Next Level."""    
-        
+        print(f"alien_speed:{self.settings.alien_speed}")
         self.main_screen()
 
 
