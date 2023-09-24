@@ -124,7 +124,8 @@ class Screens:
         current_y = alien1.rect.y
 
         # # Column
-        while current_y < self.screen.get_rect().height - 3*alien_height:
+        # It Create NEXT Row Every Time it runs
+        while current_y < self.stats.level*2*alien_height:
 
             # Row
             while current_x < self.screen.get_rect().width - alien_width:

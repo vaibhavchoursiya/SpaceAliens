@@ -16,7 +16,11 @@ class Alien(Sprite):
         self.alien_size = (60, 50)
 
         # Image and Rect of image
-        self.image = pygame.image.load("Images/alien.png")
+        self.image = pygame.image.load("Images/green_alien.png")
+
+        # Rotate Alien 180
+        self.image = pygame.transform.rotate(self.image, 180)
+        
         # Scale Image
         self.image = pygame.transform.scale(self.image, self.alien_size)
 
