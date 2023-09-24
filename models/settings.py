@@ -34,13 +34,15 @@ class Settings:
 # Helper Method
     def _create_level(self):
         """Create Levels"""
-        for i in range(2, 100):
+        for i in range(2, 10):
             dic = {}
             
             # Create Level
             dic["alien_speed"] = 0.3 + (i/10)
+            dic["red_alien_speed"] = 0.6 + (i/10)
             dic["ship_speed"] = 2.0 + (i/10)
             dic["bullet_speed"] = 2.0 + (i/10)
+            dic["red_alien_bullet_speed"] = 1.0 + (i/10)
            
             self.LEVEL_LIST.append(dic)
 # ---------------------------------------------------------
@@ -51,9 +53,11 @@ class Settings:
         """Reset the settings:"""
         # Bullet
         self.bullet_speed = 2.0
+        self.red_alien_bullet_speed = 1.0
 
         # Alien
         self.alien_speed = 0.3
+        self.red_alien_speed = 0.6
 
         # Ship
         self.ship_speed = 2.0
@@ -68,9 +72,13 @@ class Settings:
         
         # Bullet
         self.bullet_speed  = self.LEVEL_LIST[level]["bullet_speed"]
+        self.red_alien_bullet_speedspeed  = self.LEVEL_LIST[level]["red_alien_bullet_speed"]
+
 
         # Alien
         self.alien_speed = self.LEVEL_LIST[level]["alien_speed"]
+        self.red_alien_speed = self.LEVEL_LIST[level]["red_alien_speed"]
+
 
         # Ship
         self.ship_speed = self.LEVEL_LIST[level]["ship_speed"]
