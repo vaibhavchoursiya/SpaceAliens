@@ -53,7 +53,7 @@ class Settings:
         """Reset the settings:"""
         # Bullet
         self.bullet_speed = 2.0
-        self.red_alien_bullet_speed = 1.0
+        self.red_alien_bullet_speed = 2.0
 
         # Alien
         self.alien_speed = 0.3

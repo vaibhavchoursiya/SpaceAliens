@@ -22,6 +22,8 @@ from random import randint
 
 from models.red_alien import RedAlien
 
+from models.alien_bullet import AlienBullet
+
 
 
 class Screens:
@@ -38,6 +40,7 @@ class Screens:
 
         # Bullet id
         self.bullet_id = 0
+        self.alien_bullet_id = 0
 
         # Stats instance
         self.stats = Stats()
@@ -118,10 +121,25 @@ class Screens:
 
         print(len(self.bullets))    
 
+
+    # Draw Alien Bullet
+    def draw_alien_bullets(self):
+        """Draw Alien Bullet."""
+        
+        for alien_bullet in self.alien_bullets.sprites().copy():
+            if alien_bullet.y > self.screen.get_rect().height or alien_bullet.id %  12  != 0:
+                # Remove Bullet that cross the window
+                self.alien_bullets.remove(alien_bullet)
+        
+        for alien_bullet in self.alien_bullets.sprites():
+            alien_bullet.draw_alien_bullet()
+                
+
+
     # Create Alien Fleet
     def _create_alien_fleet(self):
         """create alien fleet"""
-
+        
         alien1 =  Alien(self.screen, self.settings,0)
         # Alien spec
         alien_width = alien1.rect.width
@@ -205,6 +223,7 @@ class Screens:
     # Create Bullets
     def _create_bullets(self):
         """Create Bullet object and in bullets List."""
+        # Ship Bullet
         new_bullet = Bullet(
             screen=self.screen,
             settings= self.settings,
@@ -213,6 +232,19 @@ class Screens:
         )        
         self.bullet_id+=1
         self.bullets.add(new_bullet)
+
+        # Alien Bullet
+        for red_alien in self.red_aliens.sprites():
+            alien_bullet = AlienBullet(
+                screen=self.screen,
+                settings=self.settings,
+                alien_ship=red_alien,
+                id=self.alien_bullet_id
+                
+            )
+            self.alien_bullet_id+=1
+
+            self.alien_bullets.add(alien_bullet)
 
 
     # Check Alien crossed ship
@@ -294,6 +326,7 @@ class Screens:
         
         # Bullet
         self.bullets = pygame.sprite.Group() 
+        self.alien_bullets = pygame.sprite.Group()
 
         
         # Score Board
@@ -374,6 +407,7 @@ class Screens:
 
         # Bullets
         self.bullets.update()
+        self.alien_bullets.update()
 
         # Alien
         self.aliens.update()
@@ -399,6 +433,7 @@ class Screens:
         
         # Bullet
         self._draw_bullets()
+        self.draw_alien_bullets()
 
         # Alien 
         self.aliens.draw(self.screen)
@@ -472,6 +507,7 @@ class Screens:
         
         # Bullets
         self.bullets.empty()
+        self.alien_bullets.empty()
 
         # Create Alien Fleet
         # Modified This Method for create one extra alien.
