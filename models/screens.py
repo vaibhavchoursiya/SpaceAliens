@@ -212,11 +212,11 @@ class Screens:
 
 
     # Collide Between aliens and bullets 
-    def _collide_between_aliens_and_bullets(self):
+    def _check_collided_between_alien_and_bullets(self):
         """Check Collide Between Aliens and Bullets ,
         Delete Both of them.
         """        
-        if pygame.sprite.groupcollide(self.aliens, self.bullets, True, True):
+        if pygame.sprite.groupcollide(self.aliens, self.bullets, True, True) or    pygame.sprite.groupcollide(self.red_aliens, self.bullets, True, True):
             # Increase score of Player.
             self.stats.update_score()
 
@@ -256,10 +256,18 @@ class Screens:
                 return True
 
 
+    # Check _red_alien_crossed_ship
+    def _red_alien_crossed_ship(self):
+        for red_alien in self.red_aliens.sprites():
+            # If alien reached the bottom of screen without hitting bullet.
+            if red_alien.y > self.screen.get_rect().height - red_alien.rect.height:
+                return True
+
+
     # Check ship and alien collided
     def _collide_alien_and_ship(self):
         """ If alien and ship collided switch to game over screen"""
-        if pygame.sprite.spritecollideany(self.ship, self.aliens) or self._alien_crossed_ship():
+        if pygame.sprite.spritecollideany(self.ship, self.aliens) or self._alien_crossed_ship() or self._red_alien_crossed_ship():
             # Update Highscore
             highscore = read_data()
             # Update the highscore if current score is greater than
@@ -280,6 +288,16 @@ class Screens:
             self.red_aliens.empty()
             self._set_screen(s6=True)
            
+
+    # _check_alien_bullet_collided_with_ship    
+    def _check_alien_bullet_collided_with_ship(self):
+        """Check alien bullet collided with ship."""
+
+        if pygame.sprite.spritecollide(self.ship,self.alien_bullets, True):
+            print("alien bullet hit ship")
+            # Go to gameover screen
+            self._set_screen(s3=True)
+
 
 
 # -----------------------------------
@@ -413,8 +431,7 @@ class Screens:
         self.aliens.update()
         self.red_aliens.update()
 
-    # Collide between alien and Bullet
-        self._collide_between_aliens_and_bullets()
+    
 
         # Update score board
         self.scoreboard.update()
@@ -441,9 +458,12 @@ class Screens:
 
         self._update_screen()
 
+    # Collide between alien and Bullet
+        self._check_collided_between_alien_and_bullets()
 
     # Collide between alien and ship or alien cross the ship
         self._collide_alien_and_ship()    
+        self._check_alien_bullet_collided_with_ship()
 
     # Check if every alien is distroed or not.
     # if they then go to next level.
