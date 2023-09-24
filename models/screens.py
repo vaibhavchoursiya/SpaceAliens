@@ -24,6 +24,8 @@ from models.red_alien import RedAlien
 
 from models.alien_bullet import AlienBullet
 
+from models.sheild import Sheild
+
 
 
 class Screens:
@@ -282,7 +284,7 @@ class Screens:
     def _check_all_aliens_are_distroied(self):
         """"Check All aliens are distroied."""
         # If aliens are empty.
-        if not self.aliens:
+        if not self.aliens and not self.red_aliens:
             # Pre Next Level Screen
             self.aliens.empty()
             self.red_aliens.empty()
@@ -292,8 +294,11 @@ class Screens:
     # _check_alien_bullet_collided_with_ship    
     def _check_alien_bullet_collided_with_ship(self):
         """Check alien bullet collided with ship."""
+        if self.sheild.draw == True and pygame.sprite.spritecollide(self.sheild, self.alien_bullets, [0, 1]):
+            print("-------------------------------------sheild stopped the bullet------------------------------------")
+            
 
-        if pygame.sprite.spritecollide(self.ship,self.alien_bullets, True):
+        elif pygame.sprite.spritecollide(self.ship,self.alien_bullets, True):
             print("alien bullet hit ship")
             # Go to gameover screen
             self._set_screen(s3=True)
@@ -336,11 +341,20 @@ class Screens:
         self.play.draw_button(self.settings.screen_height/2 + 20)
         self.level.draw_button(self.settings.screen_height/2 + 70)
 
+        self._update_screen()
+
         # Ship
         self.ship = Ship(
             screen=self.screen,
             settings=self.settings
             )
+        
+        # Sheild
+        self.sheild = Sheild(
+            ship=self.ship,
+            screen=self.screen,
+            settings=self.settings
+        )
         
         # Bullet
         self.bullets = pygame.sprite.Group() 
@@ -364,7 +378,6 @@ class Screens:
         self._create_alien_fleet()
 
 
-        self._update_screen()
 
 
     # Pre Main Screen
@@ -423,6 +436,9 @@ class Screens:
         # Ship
         self.ship.update() 
 
+        # Sheild
+        self.sheild.update()
+
         # Bullets
         self.bullets.update()
         self.alien_bullets.update()
@@ -446,6 +462,9 @@ class Screens:
 
         # Draw ship
         self.ship.draw_ship()
+
+        # Draw Sheild
+        self.sheild.draw_sheild()
 
         
         # Bullet

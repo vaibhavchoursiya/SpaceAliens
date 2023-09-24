@@ -12,6 +12,10 @@ class Settings:
         # Frame rate
         self.frame_rate = 60
 
+        # Sheild
+        self.sheild_width = 50
+        self.sheild_height = 4
+
 
         # Bullet
         self.bullet_width = 3

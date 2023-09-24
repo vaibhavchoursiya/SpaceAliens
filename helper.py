@@ -38,6 +38,11 @@ class Helper:
                 self.screens.ship.left = True
             pass
 
+        elif event.key == pygame.K_SPACE:
+            # Make Sheild before Ship
+            if self.screens.s2 or self.screens.s4:
+                self.screens.sheild.draw = True
+
     
     def _key_is_released(self, event):
         """When key is pressed."""
@@ -52,6 +57,11 @@ class Helper:
             if self.screens.s2 or self.screens.s4:
                 self.screens.ship.left = False
             pass
+
+        elif event.key == pygame.K_SPACE:
+            # Make Sheild before Ship
+            if self.screens.s2 or self.screens.s4:
+                self.screens.sheild.draw = False
 
             
     def _mouse_is_clicked(self, current_pos):
