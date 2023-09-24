@@ -6,7 +6,7 @@ from models.scoreboard import ScoreBoard
 
 class Alien(Sprite):
     """It contain Alien attributes and its Methods."""
-    def __init__(self, screen, settings):
+    def __init__(self, screen, settings, id):
         """Initilize the aliens attributes and its methods"""
         super().__init__()
 
@@ -14,6 +14,7 @@ class Alien(Sprite):
         self.screen_rect = screen.get_rect()
         self.settings = settings
         self.alien_size = (60, 50)
+        self.id = id
 
         # Image and Rect of image
         self.image = pygame.image.load("Images/green_alien.png")
