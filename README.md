@@ -28,11 +28,11 @@
 + If alien or aliens hit your ship or cross your ship **GAMEOVER**
 + Player can not move ship up and down *(for now.)*.
 + Scoreboard update after **GAMEOVER**.
++ Player can enable sheild by pressing Space.
 
 ## Future features
 
 + Player have different type of bullets that have greater impact on aliens.
-+ Aliens can alos fire bullets on ship.
 + After some level different types of alien attack.
 + Player can upgrade their Ship.
 + Music will add soon.

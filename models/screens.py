@@ -328,13 +328,24 @@ class Screens:
 
         self.intro_label2 = Label(
             label="Aliens",
-            font_size=60,
+            font_size=70,
             screen=self.screen,
             settings=self.settings,
         )
         self.intro_label2.draw_on_intro_screen(
-            x=120,
-            y=166
+            x=100,
+            y=170
+        )
+
+        self.intro_label3 = Label(
+            label="A Classis Game",
+            font_size=20,
+            screen=self.screen,
+            settings=self.settings,
+        )
+        self.intro_label3.draw_on_intro_screen(
+            x=0,
+            y=300
         )
 
         # Button
